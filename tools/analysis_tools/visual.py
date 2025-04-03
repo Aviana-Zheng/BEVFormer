@@ -468,10 +468,27 @@ def render_sample_data(
         plt.show()
     plt.close()
 
+# if __name__ == '__main__':
+#     nusc = NuScenes(version='v1.0-trainval', dataroot='./data/nuscenes', verbose=True)
+#     # render_annotation('7603b030b42a4b1caa8c443ccc1a7d52')
+#     bevformer_results = mmcv.load('test/bevformer_base/Thu_Jun__9_16_22_37_2022/pts_bbox/results_nusc.json')
+#     sample_token_list = list(bevformer_results['results'].keys())
+#     for id in range(0, 10):
+#         render_sample_data(sample_token_list[id], pred_data=bevformer_results, out_path=sample_token_list[id])
+
+# 修改1 替换主函数
+import os
 if __name__ == '__main__':
-    nusc = NuScenes(version='v1.0-trainval', dataroot='./data/nuscenes', verbose=True)
-    # render_annotation('7603b030b42a4b1caa8c443ccc1a7d52')
-    bevformer_results = mmcv.load('test/bevformer_base/Thu_Jun__9_16_22_37_2022/pts_bbox/results_nusc.json')
+    # 数据集路径，使用mini就用v1.0-mini, 使用full就用v1.0-trainval
+    nusc = NuScenes(version='v1.0-mini', dataroot='./data/nuscenes', verbose=False)
+    # results_nusc.json路径
+    bevformer_results = mmcv.load('test/bevformer_tiny/Tue_Apr__1_21_42_14_2025/pts_bbox/results_nusc.json')
+    # 添加result目录
+    save_dir = "result"
+    if not os.path.exists(save_dir):
+        os.mkdir(save_dir)
+
     sample_token_list = list(bevformer_results['results'].keys())
+    
     for id in range(0, 10):
-        render_sample_data(sample_token_list[id], pred_data=bevformer_results, out_path=sample_token_list[id])
+        render_sample_data(sample_token_list[id], pred_data=bevformer_results, out_path=os.path.join(save_dir, sample_token_list[id]))

@@ -7,11 +7,13 @@
 Train BEVFormer with 8 GPUs 
 ```
 ./tools/dist_train.sh ./projects/configs/bevformer/bevformer_base.py 8
+./tools/dist_train.sh ./projects/configs/bevformer/bevformer_tiny.py 1
 ```
 
 Eval BEVFormer with 8 GPUs
 ```
 ./tools/dist_test.sh ./projects/configs/bevformer/bevformer_base.py ./path/to/ckpts.pth 8
+./tools/dist_test.sh ./projects/configs/bevformer/bevformer_tiny.py work_dirs/bevformer_tiny/latest.pth 1
 ```
 Note: using 1 GPU to eval can obtain slightly higher performance because continuous video may be truncated with multiple GPUs. By default we report the score evaled with 8 GPUs.
 
@@ -29,3 +31,5 @@ and we provide another script to train BEVFormer with FP16.
 # Visualization 
 
 see [visual.py](../tools/analysis_tools/visual.py)
+
+python tools/analysis_tools/visual.py
