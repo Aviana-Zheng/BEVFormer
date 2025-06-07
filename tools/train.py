@@ -29,6 +29,11 @@ from mmseg import __version__ as mmseg_version
 
 from mmcv.utils import TORCH_VERSION, digit_version
 
+import sys
+import os
+
+sys.path.insert(0, os.getcwd())
+
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Train a detector')
