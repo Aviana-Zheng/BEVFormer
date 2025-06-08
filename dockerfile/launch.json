@@ -20,7 +20,8 @@
                 "pytorch",
                 "--deterministic"
             ],
-            // "env": {"CUDA_VISIBLE_DEVICES":"0"},
+            "env": {"CUDA_VISIBLE_DEVICES":"0"},
+            "justMyCode": false,
         }
     ]
 }
